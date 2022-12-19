@@ -1,0 +1,7 @@
+{
+  "name": "ionic-music-social",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
