@@ -1,68 +1,81 @@
 <template>
   <ion-page>
-    <ion-header :translucent="true">
-      <ion-toolbar>
-        <ion-title>Blank</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    
-    <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">Blank</ion-title>
-        </ion-toolbar>
-      </ion-header>
-    
-      <div id="container">
-        <strong>Ready to create an app?</strong>
-        <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+   <!-- <CustomHeaderVue/> -->
+   <ion-content >
+      <div class="cardsContainer">
+         <article :style="{width:'160px',height:'220px'}">
+            <ion-card >
+                  <img :style="{height:'100%',objectFit:'cover'}" alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+   
+            </ion-card>
+            <footer :style="{marginTop:'11px'}">
+               <p :style="{fontWeight:'bold'}">God In Me</p>
+               <p :style="{marginTop:'3px'}">God In Me</p>
+            </footer>
+
+         </article>
+         <article :style="{width:'160px',height:'220px'}">
+            <ion-card >
+                  <img :style="{height:'100%',objectFit:'cover'}" alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+   
+            </ion-card>
+            <footer :style="{marginTop:'11px'}">
+               <p :style="{fontWeight:'bold'}">God In Me</p>
+               <p :style="{marginTop:'3px'}">God In Me</p>
+            </footer>
+
+         </article>
+         <article :style="{width:'160px',height:'220px'}">
+            <ion-card >
+                  <img :style="{height:'100%',objectFit:'cover'}" alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+   
+            </ion-card>
+            <footer :style="{marginTop:'11px'}">
+               <p :style="{fontWeight:'bold'}">God In Me</p>
+               <p :style="{marginTop:'3px'}">God In Me</p>
+            </footer>
+
+         </article>
       </div>
-    </ion-content>
+      
+
+   </ion-content>
+   
+      
   </ion-page>
 </template>
+  
+<script lang="ts" setup>
+import { IonPage,IonContent,IonCard,IonCardHeader,IonCardContent,IonCardSubtitle,IonFooter } from '@ionic/vue';
+import {calendar,home,search,musicalNotes,chatbubble} from 'ionicons/icons'
+import { useRouter } from 'vue-router';
 
-<script lang="ts">
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
-import { defineComponent } from 'vue';
+//custom component
+import CustomHeaderVue from '@/components/CustomHeader.vue';
 
-export default defineComponent({
-  name: 'HomePage',
-  components: {
-    IonContent,
-    IonHeader,
-    IonPage,
-    IonTitle,
-    IonToolbar
-  }
-});
+const router= useRouter()
+  
 </script>
 
 <style scoped>
-#container {
-  text-align: center;
-  
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+p,footer{
+   margin: 0;
+   padding: 0;
+}
+.cardsContainer{
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   justify-items: center;
+   gap: 15px;
+   padding: 15px;
+   width: 100%;
+   /* background-color: aqua; */
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+ion-card{
+   /* background-color: aqua; */
+   height: 70%;
+   margin: 0;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-  
-  color: #8c8c8c;
-  
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
-}
 </style>
