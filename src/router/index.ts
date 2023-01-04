@@ -6,7 +6,7 @@ import TabsPageVue from '@/views/TabsPage.vue'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    redirect: '/tabs/'
+    redirect: '/tabs/home'
   },
   {
     path:'/tabs/',
@@ -48,6 +48,10 @@ const routes: Array<RouteRecordRaw> = [
         ]
       }
     ]
+  },
+  {
+    path:'singleArtist/:id',
+    component:()=>import('@/views/SingleArtistPage.vue')
   }
 ]
 
