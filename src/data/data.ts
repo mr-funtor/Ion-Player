@@ -54,6 +54,7 @@ const songs: singleSongType[]=[
         year:'2001',
         image:'',
         trackNumber:7,
+        lyrics:'',
     },
     {
         id:'555gg664',
@@ -63,7 +64,8 @@ const songs: singleSongType[]=[
         source:Cold,
         year:'2001',
         image:'',
-        trackNumber:6
+        trackNumber:6,
+        lyrics:'',
     },
     {
         id:'888gg666',
@@ -73,7 +75,8 @@ const songs: singleSongType[]=[
         source:Days,
         year:'2013',
         image:'',
-        trackNumber:6
+        trackNumber:6,
+        lyrics:'',
     },
 ]
 

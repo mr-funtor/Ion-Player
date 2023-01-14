@@ -24,7 +24,8 @@ const playerStore=create<playerState>(()=>({
         source:"",
         year: "",
         image:"",
-        trackNumber:0
+        trackNumber:0,
+        lyrics:''
     },
     queuedSongs:[]
 }))

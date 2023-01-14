@@ -34,6 +34,10 @@ const playerControls=():any=>{
                 playSongInQueuedList(song,index)
             }
             break;
+            case "singleSong":{
+                playSingleSong(song)
+            }
+            break;
         
             default:
                 break;
@@ -42,7 +46,7 @@ const playerControls=():any=>{
     }
 
     function playAllSongs(songId:string){
-        setState({queuedSongs:songs})//put all songs in state
+        setState({queuedSongs:songs})//queue all songs in state
         const clickedSongIndex= songs.findIndex((song)=> song.id === songId)
         setState({currentSongIndex:clickedSongIndex})
 
@@ -59,6 +63,12 @@ const playerControls=():any=>{
 
     function playSongInQueuedList(song:singleSongType,index:number){
         setState({currentSongIndex:index})//changes to the index of the clicked song
+        setCurrentlyPlaying(song.id)
+    }
+
+    function playSingleSong(song:singleSongType){
+        setState({queuedSongs:[song]})//queue the song in state
+        setState({currentSongIndex:0})
         setCurrentlyPlaying(song.id)
     }
 

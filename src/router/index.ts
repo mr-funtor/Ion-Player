@@ -56,6 +56,10 @@ const routes: Array<RouteRecordRaw> = [
   {
     path:'/singleAlbum/:id',
     component:()=>import('@/views/SingleAlbumPage.vue')
+  },
+  {
+    path:'/singleSong/:id',
+    component:()=>import('@/views/SingleSongPage.vue')
   }
 ]
 

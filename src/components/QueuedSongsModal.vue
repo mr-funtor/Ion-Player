@@ -85,7 +85,7 @@ const {pauseSong,playMe,playSound}=playerControls()
 }
 
 .currentSong{
-    background-color: rgba(57, 179, 250, 0.1);
+    background-color: rgba(56, 129, 232, 0.1);
 }
 
 .list-case{

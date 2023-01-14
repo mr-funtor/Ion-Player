@@ -19,7 +19,8 @@ type singleSongType={
     source:string,
     year: string,
     image:string,
-    trackNumber:number
+    trackNumber:number,
+    lyrics:string,
 }
 
 

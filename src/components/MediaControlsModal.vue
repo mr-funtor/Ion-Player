@@ -115,10 +115,10 @@ const {pauseSong,playSound,playNextSong,playPreviousSong}=playerControls()
 
 .play-case{
     padding: 20px;
-    background-color: rgba(57, 179, 250, 0.1);
+    background-color: rgba(56, 129, 232, 0.1);
     display: flex;
     justify-content: center;
-    border: 2px solid rgba(57, 179, 250, 1);
+    border: 2px solid rgba(56, 129, 232, 1);
     border-radius: 50%;
     text-align: center;
 }
