@@ -9,15 +9,17 @@
     >
         <ion-content class="ion-padding">
             <ion-text>Up Next</ion-text>
-            <ion-list :inset="true" lines="none" :style="{padding:'0px'}">
-                <div v-for="song in allQueuedSongs" @click="playMe($event,song.id)" class="songContainer" :key="song.id" data-structure="queuedSingleTrack">
-                    <ion-item>
+            <ion-list :inset="true" lines="none" :style="{padding:'0px'}" >
+                <div v-for="(song,index) in allQueuedSongs" @click="playMe($event,song,index)" :class="['songContainer',index===currentlyPlayingIndex && 'currentSong']" :key="song.id" data-structure="queuedSingleTrack">
+                    <div 
+                    :class="['list-case']"
+                    >
                         <ion-avatar :style="{backgroundColor:'grey',borderRadius:'4px'}"></ion-avatar>
                         <div :style="{marginLeft:'15px'}">
                             <h6>{{song.name}}</h6>
                             <ion-note>{{findArtistName(song.artist)}}</ion-note>
                         </div>
-                    </ion-item>
+                    </div>
                     <ion-text>
                         <p>&#8942;</p>
                     </ion-text>
@@ -51,10 +53,12 @@ const {getState,setState,subscribe}= playerStore;
 const {getState:mediaGet,subscribe:mediaSubscribe} = useMediaControlStore
 const allQueuedSongs=ref<singleSongType[]>(getState().queuedSongs)
 const isOpen= ref<boolean>(mediaGet().isOpen)
+const currentlyPlayingIndex= ref<number>(getState().currentSongIndex)
 
 
 subscribe(()=>{
     allQueuedSongs.value=getState().queuedSongs
+    currentlyPlayingIndex.value= getState().currentSongIndex
 })
 
 mediaSubscribe(()=>{
@@ -65,11 +69,28 @@ const {pauseSong,playMe,playSound}=playerControls()
 </script>
 
 <style scoped>
+*{
+    margin: 0;
+    padding: 0;
+}
 
 .songContainer{
     display:flex;
     justify-content:space-between;
     align-items:center;
+    width: 100%;
+    min-height: 60px;
+    margin-bottom: 10px;
+    padding-right: 5px;
+}
+
+.currentSong{
+    background-color: rgba(57, 179, 250, 0.1);
+}
+
+.list-case{
+    display: flex;
+    align-items: center;
 }
 
 </style>

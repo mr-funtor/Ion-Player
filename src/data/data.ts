@@ -42,6 +42,7 @@ const albums: singleAlbumType[]=[
 
 import Days from '@/assets/30Days.mp3'
 import Tight from '@/assets/Tightrope.mp3'
+import Cold from '@/assets/Cold.mp3'
 
 const songs: singleSongType[]=[
     {
@@ -59,7 +60,7 @@ const songs: singleSongType[]=[
         name:'Cold War',
         artist:'34df34',
         album:'sd34sd',
-        source:Tight,
+        source:Cold,
         year:'2001',
         image:'',
         trackNumber:6

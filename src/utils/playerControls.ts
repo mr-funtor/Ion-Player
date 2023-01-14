@@ -17,7 +17,7 @@ const player:HTMLAudioElement= new Audio()
 
 const playerControls=():any=>{
 
-    function playMe(event:Event,song:singleSongType){
+    function playMe(event:Event,song:singleSongType,index:number){
         const target= event.currentTarget as  HTMLDivElement
         console.log(target.dataset.structure)
 
@@ -30,30 +30,14 @@ const playerControls=():any=>{
                 playAlbumSongs(song)
             }
             break;
+            case "queuedSingleTrack":{
+                playSongInQueuedList(song,index)
+            }
+            break;
         
             default:
                 break;
         }
-        // return console.log(songId)
-        // if(songId !== undefined){
-        //     const songIndex:number=dummyData.findIndex((song)=>song.id===songId)
-        //     console.log(dummyData[songIndex])
-        //     setState({currentlyPlaying:dummyData[songIndex]})
-        //     player.src=getState().currentlyPlaying.source;
-
-        // }
-
-        // const currentSong=findSong(songId)
-        // const nowPlaying={...currentSong,artist:findArtistName(currentSong?.artist)}
-        // const nowPlaying={
-        //     id:currentSong?.id,
-        //     name:currentSong?.name,
-        //     artist:findArtist(currentSong?.artist!!),
-        //     album:currentSong?.album,
-        //     source:currentSong?.source,
-        //     year: currentSong?.year
-        // }
-        // const currentArtist=findArtist(currentSong?.artist)
 
     }
 
@@ -67,9 +51,14 @@ const playerControls=():any=>{
 
     function playAlbumSongs(song:singleSongType){
         const songsPicked= findSongsInAlbum(song.album as string)
-        setState({queuedSongs:songsPicked}) //put all the songs in the album into state
+        setState({queuedSongs:songsPicked}) //puts all the songs in the album into state
         setState({currentSongIndex:song.trackNumber-1}) //tracks start from number one so we have to substract
         // return console.log(songsPicked,song)
+        setCurrentlyPlaying(song.id)
+    }
+
+    function playSongInQueuedList(song:singleSongType,index:number){
+        setState({currentSongIndex:index})//changes to the index of the clicked song
         setCurrentlyPlaying(song.id)
     }
 
