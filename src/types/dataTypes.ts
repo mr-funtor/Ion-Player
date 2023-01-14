@@ -1,27 +1,30 @@
-type singleArtist={
+type singleArtistType={
     id:string,
     name:string,
 }
 
-type singleAlbum={
+type singleAlbumType={
     id:string,
     name:string,
     artist:string,
-    year:string
+    year:string,
+    albumArt:string
 }
 
-type singleSong={
+type singleSongType={
     id:string,
     name:string,
     artist:string,
     album:string|null,
     source:string,
-    year: string
+    year: string,
+    image:string,
+    trackNumber:number
 }
 
 
 export{
-    singleArtist,
-    singleAlbum,
-    singleSong
+    singleArtistType,
+    singleAlbumType,
+    singleSongType
 }

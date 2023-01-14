@@ -1,6 +1,6 @@
-import {singleArtist,singleAlbum,singleSong} from '@/types/dataTypes'
+import {singleArtistType,singleAlbumType,singleSongType} from '@/types/dataTypes'
 
-const artists: singleArtist[]=[
+const artists: singleArtistType[]=[
     {
         id:'34df34',
         name:'Janelle Monae'
@@ -15,24 +15,27 @@ const artists: singleArtist[]=[
     },
 ]
 
-const albums: singleAlbum[]=[
+const albums: singleAlbumType[]=[
     {
         id:'sd34sd',
         name:'The ArchAndroid',
         artist:'34df34',
-        year:'2001'
+        year:'2001',
+        albumArt:''
     },
     {
         id:'fg34fg',
         name:'555',
         artist:'56df56',
-        year:'2019'
+        year:'2019',
+        albumArt:''
     },
     {
         id:'hh34fg',
         name:'Living For The Weekend',
         artist:'97df97',
-        year:'2013'
+        year:'2013',
+        albumArt:''
     },
     
 ]
@@ -40,14 +43,26 @@ const albums: singleAlbum[]=[
 import Days from '@/assets/30Days.mp3'
 import Tight from '@/assets/Tightrope.mp3'
 
-const songs: singleSong[]=[
+const songs: singleSongType[]=[
     {
         id:'555gg666',
         name:'Tightrope',
         artist:'34df34',
         album:'sd34sd',
         source:Tight,
-        year:'2001'
+        year:'2001',
+        image:'',
+        trackNumber:7,
+    },
+    {
+        id:'555gg664',
+        name:'Cold War',
+        artist:'34df34',
+        album:'sd34sd',
+        source:Tight,
+        year:'2001',
+        image:'',
+        trackNumber:6
     },
     {
         id:'888gg666',
@@ -55,7 +70,9 @@ const songs: singleSong[]=[
         artist:'97df97',
         album:'hh34fg',
         source:Days,
-        year:'2013'
+        year:'2013',
+        image:'',
+        trackNumber:6
     },
 ]
 

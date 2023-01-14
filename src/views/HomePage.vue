@@ -46,8 +46,7 @@
 </template>
   
 <script lang="ts" setup>
-import { IonPage,IonContent,IonCard,IonCardHeader,IonCardContent,IonCardSubtitle,IonFooter } from '@ionic/vue';
-import {calendar,home,search,musicalNotes,chatbubble} from 'ionicons/icons'
+import { IonPage,IonContent,IonCard,} from '@ionic/vue';
 import { useRouter } from 'vue-router';
 
 //custom component
@@ -58,10 +57,6 @@ const router= useRouter()
 </script>
 
 <style scoped>
-p,footer{
-   margin: 0;
-   padding: 0;
-}
 .cardsContainer{
    display: grid;
    grid-template-columns: 1fr 1fr;

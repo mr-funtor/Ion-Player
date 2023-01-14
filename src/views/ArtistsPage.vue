@@ -2,8 +2,8 @@
 <ion-page>
     <ion-content >
         <ion-list :inset="true"  :style="{padding:'0px',backgroundColor:'pink'}">
-            <ion-item v-for="artist in artists">
-                <ion-label>{{artist.name}}</ion-label>
+            <ion-item v-for="artist in artists" :key="artist.id">
+                <ion-label :router-link="`/singleArtist/${artist.id}`"  >{{artist.name}}</ion-label>
             </ion-item>
         </ion-list>
     </ion-content>

@@ -1,40 +1,32 @@
 import create from 'zustand/vanilla';
-import { singleSong } from '@/types/dataTypes';
+import { singleSongType } from '@/types/dataTypes';
 
-
-import lala from '@/assets/one.mp3'
-import lala2 from '@/assets/slow.mp3'
-
-
-type currentlyPlayingType={
-    id:string,
-    title:string,
-    artist:string,
-    year:string,
-    source:string
-}
 
 type playerState={
     controlOut:boolean,
     isPlaying:boolean,
     isLooping:boolean,
-    currentlyPlaying:singleSong,
-    queuedSong:singleSong[]
+    currentSongIndex:number,
+    currentlyPlaying:singleSongType,
+    queuedSongs:singleSongType[]
 }
 
-const playerStore=create<playerState>((set)=>({
+const playerStore=create<playerState>(()=>({
     controlOut:false,
     isPlaying:false,
     isLooping:false,
+    currentSongIndex:0,
     currentlyPlaying:{
         id:"",
         name:"",
         artist:"",
         album:"",
         source:"",
-        year: ""
+        year: "",
+        image:"",
+        trackNumber:0
     },
-    queuedSong:[]
+    queuedSongs:[]
 }))
 
 export default playerStore

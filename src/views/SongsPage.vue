@@ -2,12 +2,12 @@
     <ion-page>
         <ion-content >
             <ion-list :inset="true" lines="none" :style="{padding:'0px'}">
-                <div v-for="song in songs" @click="playMe(song.id)" :style="{display:'flex', justifyContent:'space-between',alignItems:'center'}">
-                    <ion-item>
+                <div v-for="song in songs" @click="playMe($event,song)" class="songContainer" :key="song.id" data-structure="allSingleTrack">
+                    <ion-item :style="{padding:'5px 0'}">
                         <ion-avatar :style="{backgroundColor:'grey',borderRadius:'4px'}"></ion-avatar>
                         <div :style="{marginLeft:'15px'}">
-                            <h6>{{song.name}}</h6>
-                            <ion-note>{{findArtist(song.artist)}}</ion-note>
+                            <h6 >{{song.name}}</h6>
+                            <ion-note >{{findArtist(song.artist)}}</ion-note>
                         </div>
                     </ion-item>
                     <ion-text>
@@ -22,7 +22,7 @@
 </template>
     
 <script lang="ts" setup>
-import { IonPage,IonContent,IonList,IonLabel,IonItem,IonText } from '@ionic/vue';
+import { IonPage,IonContent,IonList,IonItem,IonText,IonAvatar,IonNote } from '@ionic/vue';
 import playerControls from '@/utils/playerControls';
 import { songs,artists } from '@/data/data';
 
@@ -37,9 +37,15 @@ function findArtist(id:string):string{
 </script>
 
 <style scoped>
-div,h6,p{
+*{
     margin: 0;
     padding: 0;
+}
+
+.songContainer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
 </style>

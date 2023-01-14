@@ -9,7 +9,6 @@
 </template>
 
 <script lang="ts" setup>
-import { IonPage,IonTabs, IonTabBar, IonTabButton,IonIcon,IonRouterOutlet } from '@ionic/vue';
-import CustomHeaderVue from '@/components/CustomHeader.vue';
+import { IonPage } from '@ionic/vue';
 
 </script>

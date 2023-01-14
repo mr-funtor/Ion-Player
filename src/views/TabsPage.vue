@@ -6,7 +6,9 @@
             
             <ion-tabs>
                 <ion-router-outlet></ion-router-outlet>
+
                 <ControlsComponentVue/>
+                
                 <ion-tab-bar >
                     <ion-tab-button tab="home" href="/tabs/home">
                         <ion-icon :icon="home"></ion-icon>
@@ -27,6 +29,9 @@
                 </ion-tab-bar>
             </ion-tabs>
         </ion-content>
+
+        <MediaControlsModal/>
+        
         
         
     </ion-page>
@@ -34,14 +39,12 @@
     
     </template>
     
-    <script lang="ts" setup>
-    import { IonPage,IonTabs, IonContent,IonFooter,IonToolbar,IonTabBar, IonTabButton,IonIcon,IonRouterOutlet,IonLabel } from '@ionic/vue';
-    import {calendar,home,search,musicalNotes,chatbubble} from 'ionicons/icons'
-    import { useRouter } from 'vue-router';
+<script lang="ts" setup>
+import { IonPage,IonTabs, IonContent,IonTabBar, IonTabButton,IonIcon,IonRouterOutlet,IonLabel } from '@ionic/vue';
+import {home,search,musicalNotes,chatbubble} from 'ionicons/icons'
 
-    //custom Components
-    import { CustomHeaderVue,ControlsComponentVue,CustomModalVue } from '@/components';
-  
-    const router= useRouter()
-    
-    </script>
+//custom Components
+import { CustomHeaderVue,ControlsComponentVue,CustomModalVue,MediaControlsModal } from '@/components';
+
+
+</script>

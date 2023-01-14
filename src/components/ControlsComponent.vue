@@ -1,14 +1,14 @@
 <template>
-<div v-show="controlOut" class="container">
+<div v-show="controlOut" class="container" @click="OpenMediaControlModal($event)">
     <div>
         <h6>{{ presentSong.name }}</h6>
         <p :style="{color:'grey'}">{{ presentSong.artist }}</p>
     </div>
     <div class="controls">
-        <ion-icon :icon="playBack"></ion-icon>
+        <ion-icon :icon="playBack" @click="playPreviousSong()"></ion-icon>
         <ion-icon :icon="pause" @click="pauseSong()" v-if="isPlaying"></ion-icon>
         <ion-icon :icon="play" @click="playSound()" v-else></ion-icon>
-        <ion-icon :icon="playForward"></ion-icon>
+        <ion-icon :icon="playForward" @click="playNextSong()" ></ion-icon>
     </div>
 </div>
 </template>
@@ -23,24 +23,36 @@ import playerControls from '@/utils/playerControls';
 
 //zustand
 import playerStore from '@/composable/playerStatus';
+import mediaControlModalState from '@/composable/mediaControlState'
 
 //types
-import {singleSong} from '@/types/dataTypes'
+import {singleSongType} from '@/types/dataTypes'
 
 
-const {pauseSong,playMe,playSound}=playerControls()
+const {pauseSong,playMe,playSound,playNextSong,playPreviousSong}=playerControls()
 
-const {getState,setState,subscribe}= playerStore;
+const {getState,subscribe}= playerStore;
+const {setState:modalSetState}= mediaControlModalState
+
+
 const controlOut=ref<boolean>(getState().controlOut);
 const isPlaying= ref<boolean>(getState().isPlaying);
-const presentSong=ref<singleSong>(getState().currentlyPlaying)
+const presentSong=ref<singleSongType>(getState().currentlyPlaying)
 
 subscribe(()=>{
     controlOut.value=getState().controlOut;
     isPlaying.value=getState().isPlaying;
     presentSong.value=getState().currentlyPlaying
-    console.log(getState().currentlyPlaying,'controls')
+    // console.log(getState().currentlyPlaying,'controls')
 })
+
+function OpenMediaControlModal(e:Event){
+    const target= e.target as HTMLDivElement
+
+    if(target.classList.contains('container')){
+        modalSetState({isOpen:true})
+    }
+}
 
 
 

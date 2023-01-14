@@ -1,35 +1,39 @@
 import playerStore from "@/composable/playerStatus";
 
-const {getState,setState,subscribe} = playerStore
+const {getState,setState} = playerStore
 
-//database
-import { songs,artists } from '@/data/data';
+
+//utility
+import {findArtistName,findSong,findSongsInAlbum,findAlbum} from '@/utils/findingResources'
+
+//types
+import {singleSongType} from '@/types/dataTypes'
+
+//data
+import {songs} from '@/data/data'
 
 const player:HTMLAudioElement= new Audio()
 
-import lala from '@/assets/one.mp3'
-import lala2 from '@/assets/slow.mp3'
-
-const dummyData=[
-    {
-        id:"903847jhg",
-        title:"Jupiter Arising",
-        artist:"Jon Ape",
-        year:"2019",
-        source:lala
-    },
-    {
-        id:"lalu",
-        title:"Jupiter Arising",
-        artist:"Jon Ape",
-        year:"2019",
-        source:lala2
-    }
-]
 
 const playerControls=():any=>{
 
-    function playMe(songId:string){
+    function playMe(event:Event,song:singleSongType){
+        const target= event.currentTarget as  HTMLDivElement
+        console.log(target.dataset.structure)
+
+        switch (target.dataset.structure) {
+            case "allSingleTrack":{
+                playAllSongs(song.id)
+            }
+            break;
+            case "albumTrack":{
+                playAlbumSongs(song)
+            }
+            break;
+        
+            default:
+                break;
+        }
         // return console.log(songId)
         // if(songId !== undefined){
         //     const songIndex:number=dummyData.findIndex((song)=>song.id===songId)
@@ -39,17 +43,8 @@ const playerControls=():any=>{
 
         // }
 
-        type singleSong={
-            id:string,
-            name:string,
-            artist:string,
-            album:string|null,
-            source:string,
-            year: string
-        }
-
-        const currentSong=findSong(songId)
-        const nowPlaying={...currentSong,artist:findArtist(currentSong?.artist!!)}
+        // const currentSong=findSong(songId)
+        // const nowPlaying={...currentSong,artist:findArtistName(currentSong?.artist)}
         // const nowPlaying={
         //     id:currentSong?.id,
         //     name:currentSong?.name,
@@ -60,16 +55,49 @@ const playerControls=():any=>{
         // }
         // const currentArtist=findArtist(currentSong?.artist)
 
-        setState({currentlyPlaying:nowPlaying as singleSong})
+    }
+
+    function playAllSongs(songId:string){
+        setState({queuedSongs:songs})//put all songs in state
+        const clickedSongIndex= songs.findIndex((song)=> song.id === songId)
+        setState({currentSongIndex:clickedSongIndex})
+
+        setCurrentlyPlaying(songId)
+    }
+
+    function playAlbumSongs(song:singleSongType){
+        const songsPicked= findSongsInAlbum(song.album as string)
+        setState({queuedSongs:songsPicked}) //put all the songs in the album into state
+        setState({currentSongIndex:song.trackNumber-1}) //tracks start from number one so we have to substract
+        // return console.log(songsPicked,song)
+        setCurrentlyPlaying(song.id)
+    }
+
+    function setCurrentlyPlaying(songId:string){
+        const currentSong=findSong(songId)
+        const nowPlaying={...currentSong,artist:findArtistName(currentSong?.artist)}
+        setState({currentlyPlaying:nowPlaying})
         player.src=getState().currentlyPlaying.source;
-        
-        // console.log(currentSong,getState().currentlyPlaying)
+
         playSound()
     }
 
     function playSound(){
-        setState({controlOut:true,isPlaying:true})//this brings out the controls and makes the play button pause
+        setState({controlOut:true,isPlaying:true})//this brings out the controls and makes the play button 'pause' icon
         player.play()
+        
+        player.addEventListener('ended',()=>{
+            const presentIndex= getState().currentSongIndex
+            const presentQueuedSongs= getState().queuedSongs
+
+            if(presentIndex >= presentQueuedSongs.length-1){
+                setState({isPlaying:false})//removes the controls and makes the play button 'play' icon
+            }else{
+                playNextSong()
+            }
+        })
+
+        //NB:don't forget to make play button a spinner when loading
     }
 
     function pauseSong(){
@@ -77,20 +105,43 @@ const playerControls=():any=>{
         setState({isPlaying:false})
     }
 
-    function findSong(id:string){
-        const song= songs.find((song)=>song.id===id)
-        return song
+    function playNextSong(){
+        const presentIndex= getState().currentSongIndex
+        const presentQueuedSongs= getState().queuedSongs
+
+        if((presentIndex+1) >= presentQueuedSongs.length){
+            setState({currentSongIndex:0})//takes the next track to the first one
+        }else{
+            setState({currentSongIndex:presentIndex+1})
+        }
+
+        const nextSongId= presentQueuedSongs[getState().currentSongIndex].id  
+        setCurrentlyPlaying(nextSongId)
+
     }
 
-    function findArtist(id:string):string{
-        const aritst= artists.find((item)=>item.id===id)
-        return aritst?.name as string 
-     }
+    function playPreviousSong(){
+        const presentIndex= getState().currentSongIndex
+        const presentQueuedSongs= getState().queuedSongs
+
+        if((presentIndex-1) < 0){
+            setState({currentSongIndex:presentQueuedSongs.length-1})//takes it the last track
+        }else{
+            setState({currentSongIndex:presentIndex-1})
+        }
+
+        const nextSongId= presentQueuedSongs[getState().currentSongIndex].id  
+        setCurrentlyPlaying(nextSongId)
+    }
+
+    
 
     return{
         playMe,
         pauseSong,
-        playSound
+        playSound,
+        playNextSong,
+        playPreviousSong,
     }
 
 }
