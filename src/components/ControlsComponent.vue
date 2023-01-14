@@ -29,7 +29,7 @@ import mediaControlModalState from '@/composable/mediaControlState'
 import {singleSongType} from '@/types/dataTypes'
 
 
-const {pauseSong,playMe,playSound,playNextSong,playPreviousSong}=playerControls()
+const {pauseSong,playSound,playNextSong,playPreviousSong}=playerControls()
 
 const {getState,subscribe}= playerStore;
 const {setState:modalSetState}= mediaControlModalState

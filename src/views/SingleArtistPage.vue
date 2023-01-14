@@ -45,7 +45,6 @@ import {findArtistName,findArtistAlbums} from '@/utils/findingResources'
 
 const route= useRoute()
 const params= route.params
-const router= useRouter()
 
 const singleArtistName= findArtistName(params.id as string)
 const singleArtistAlbums= findArtistAlbums(params.id as string)

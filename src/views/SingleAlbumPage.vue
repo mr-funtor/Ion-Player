@@ -18,12 +18,12 @@
 </template>
 
 <script lang="ts" setup>
-import { IonPage,IonContent,IonCard,IonList,IonItem,IonLabel } from '@ionic/vue';
+import { IonPage,IonContent,IonList,IonItem,IonLabel } from '@ionic/vue';
 import { useRoute } from 'vue-router';
-import {ref} from 'vue'
+// import {ref} from 'vue'
 
 //utility
-import {findArtistName,findArtistAlbums,findAlbum,findSongsInAlbum} from '@/utils/findingResources'
+import {findAlbum,findSongsInAlbum} from '@/utils/findingResources'
 import playerControls from '@/utils/playerControls';
 import {singleSongType} from '@/types/dataTypes'
 
@@ -38,8 +38,7 @@ import mediaControlModalState from '@/composable/mediaControlState'
 const route= useRoute()
 const params= route.params
 
-// const singleArtistName= findArtistName(params.id as string)
-// const singleArtistAlbums= findArtistAlbums(params.id as string)
+
 const singleAlbum= findAlbum(params.id as string)
 const foundSongs= findSongsInAlbum(params.id as string)
 const {playMe}= playerControls()
