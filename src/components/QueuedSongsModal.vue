@@ -59,6 +59,7 @@ const currentlyPlayingIndex= ref<number>(getState().currentSongIndex)
 subscribe(()=>{
     allQueuedSongs.value=getState().queuedSongs
     currentlyPlayingIndex.value= getState().currentSongIndex
+    console.log(getState().currentSongIndex)
 })
 
 mediaSubscribe(()=>{

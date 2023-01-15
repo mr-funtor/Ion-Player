@@ -1,6 +1,9 @@
+//zustand
 import playerStore from "@/composable/playerStatus";
+import selectingFunctionState from '@/composable/selectingFunctionState'
 
-const {getState,setState} = playerStore
+const {getState,setState} = playerStore;
+const {getState:getQueuingState,subscribe:queueSubscribe,setState:setQueuingState} = selectingFunctionState
 
 
 //utility
@@ -56,7 +59,8 @@ const playerControls=():any=>{
     function playAlbumSongs(song:singleSongType){
         const songsPicked= findSongsInAlbum(song.album as string)
         setState({queuedSongs:songsPicked}) //puts all the songs in the album into state
-        setState({currentSongIndex:song.trackNumber-1}) //tracks start from number one so we have to substract
+        const clickedSongIndex= songsPicked.findIndex((item)=> item.id === song.id)
+        setState({currentSongIndex:clickedSongIndex}) //tracks start from number one so we have to substract
         // return console.log(songsPicked,song)
         setCurrentlyPlaying(song.id)
     }
@@ -133,6 +137,32 @@ const playerControls=():any=>{
         setCurrentlyPlaying(nextSongId)
     }
 
+    function QueueTracks(){
+        const structure= getQueuingState().structure;
+        const itemToBeQueued=getQueuingState().toBeQueuedItem;
+
+        switch (structure) {
+            case "allSingleTrack":{
+                // playAllSongs(song.id)
+            }
+            break;
+            case "albumTrack":{
+                // playAlbumSongs(song)
+            }
+            break;
+            case "queuedSingleTrack":{
+                // playSongInQueuedList(song,0)
+            }
+            break;
+            case "singleSong":{
+                setState({queuedSongs:[...getState().queuedSongs,itemToBeQueued as singleSongType]})
+            }
+            break;
+        
+            default:
+                break;
+        }
+    }
     
 
     return{
@@ -141,6 +171,7 @@ const playerControls=():any=>{
         playSound,
         playNextSong,
         playPreviousSong,
+        QueueTracks
     }
 
 }

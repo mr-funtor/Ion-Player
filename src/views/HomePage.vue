@@ -40,6 +40,7 @@ import { songs} from '@/data/data';
 
 //utils
 import { findArtistName } from '@/utils/findingResources';
+
   
 </script>
 

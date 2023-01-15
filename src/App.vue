@@ -4,17 +4,15 @@
   </ion-app>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { IonApp, IonRouterOutlet } from '@ionic/vue';
-import { defineComponent } from 'vue';
+import { useRouter } from 'vue-router';
+import closeAllModals from './utils/closeAllModals';
 
-export default defineComponent({
-  name: 'App',
-  components: {
-    IonApp,
-    IonRouterOutlet
-  }
-});
+const router= useRouter()
+router.beforeEach(()=>{
+  closeAllModals()
+})
 </script>
 
 <style>

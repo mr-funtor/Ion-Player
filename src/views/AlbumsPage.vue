@@ -37,6 +37,7 @@ import {RouterLink } from 'vue-router';
 
 //utils
 import {findArtistName} from '@/utils/findingResources'
+import closeAllModals from '@/utils/closeAllModals';
 
 
 </script>

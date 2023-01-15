@@ -31,7 +31,7 @@
         </ion-content>
 
         <MediaControlsModal/>
-        
+        <SelectFunctionsModal/>
         
         
     </ion-page>
@@ -44,7 +44,11 @@ import { IonPage,IonTabs, IonContent,IonTabBar, IonTabButton,IonIcon,IonRouterOu
 import {home,search,musicalNotes,chatbubble} from 'ionicons/icons'
 
 //custom Components
-import { CustomHeaderVue,ControlsComponentVue,CustomModalVue,MediaControlsModal } from '@/components';
-
-
+import { 
+    CustomHeaderVue,
+    ControlsComponentVue,
+    CustomModalVue,
+    MediaControlsModal,
+    SelectFunctionsModal
+ } from '@/components';
 </script>
