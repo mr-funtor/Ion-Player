@@ -14,7 +14,7 @@
                   :style="{width:'160px',height:'220px'}"
                >
                   <ion-card >
-                        <img :style="{height:'100%',objectFit:'cover'}" alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+                        <img :style="{height:'100%',width:'100%',objectFit:'cover'}" alt="album art" :src="song.image" />
                   </ion-card>
                   <footer :style="{marginTop:'11px'}">
                      <p :style="{fontWeight:'bold'}">{{ song.name }}</p>

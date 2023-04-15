@@ -32,8 +32,10 @@
 </template>
 
 <script lang="ts" setup>
-import { IonModal,IonContent,IonList,IonItem,IonText,IonAvatar,IonNote } from '@ionic/vue';
-import { ref } from 'vue';
+import { IonModal,IonContent,IonList,IonText,IonAvatar,IonNote } from '@ionic/vue';
+import { ref,defineProps } from 'vue';
+
+
 
 //utils
 import playerControls from '@/utils/playerControls';
@@ -41,18 +43,17 @@ import playerControls from '@/utils/playerControls';
 //data
 import { findArtistName } from '@/utils/findingResources';
 
-
 //types
 import {singleSongType} from '@/types/dataTypes'
 
 //zustand
 import playerStore from '@/composable/playerStatus';
-import useMediaControlStore from '@/composable/mediaControlState'
+
+//props
+defineProps(['isOpen'])
 
 const {getState,setState,subscribe}= playerStore;
-const {getState:mediaGet,subscribe:mediaSubscribe} = useMediaControlStore
 const allQueuedSongs=ref<singleSongType[]>(getState().queuedSongs)
-const isOpen= ref<boolean>(mediaGet().isOpen)
 const currentlyPlayingIndex= ref<number>(getState().currentSongIndex)
 
 
@@ -62,11 +63,8 @@ subscribe(()=>{
     console.log(getState().currentSongIndex)
 })
 
-mediaSubscribe(()=>{
-    isOpen.value=mediaGet().isOpen
-})
 
-const {pauseSong,playMe,playSound}=playerControls()
+const {playMe}=playerControls()
 </script>
 
 <style scoped>

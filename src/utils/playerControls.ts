@@ -60,13 +60,14 @@ const playerControls=():any=>{
         const songsPicked= findSongsInAlbum(song.album as string)
         setState({queuedSongs:songsPicked}) //puts all the songs in the album into state
         const clickedSongIndex= songsPicked.findIndex((item)=> item.id === song.id)
-        setState({currentSongIndex:clickedSongIndex}) //tracks start from number one so we have to substract
-        // return console.log(songsPicked,song)
+        setState({currentSongIndex:clickedSongIndex})
+       
         setCurrentlyPlaying(song.id)
     }
 
     function playSongInQueuedList(song:singleSongType,index:number){
         setState({currentSongIndex:index})//changes to the index of the clicked song
+
         setCurrentlyPlaying(song.id)
     }
 
@@ -76,6 +77,7 @@ const playerControls=():any=>{
         setCurrentlyPlaying(song.id)
     }
 
+    //this places a song into current playing
     function setCurrentlyPlaying(songId:string){
         const currentSong=findSong(songId)
         const nowPlaying={...currentSong,artist:findArtistName(currentSong?.artist)}
@@ -156,11 +158,19 @@ const playerControls=():any=>{
             break;
             case "singleSong":{
                 setState({queuedSongs:[...getState().queuedSongs,itemToBeQueued as singleSongType]})
+                    
+                
             }
             break;
         
             default:
                 break;
+        }
+        
+        //if the queue list is empty play the track
+        if(getState().queuedSongs.length <= 1){
+            setState({currentSongIndex:0})
+            setCurrentlyPlaying(getState().queuedSongs[0].id)
         }
     }
     

@@ -32,12 +32,11 @@
     
 <script lang="ts" setup>
 import { IonPage,IonContent,IonList,IonItem,IonAvatar,IonText,IonNote } from '@ionic/vue';
-import {albums,artists} from '@/data/data';
+import {albums} from '@/data/data';
 import {RouterLink } from 'vue-router';
 
 //utils
 import {findArtistName} from '@/utils/findingResources'
-import closeAllModals from '@/utils/closeAllModals';
 
 
 </script>

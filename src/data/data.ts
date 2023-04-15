@@ -43,6 +43,8 @@ const albums: singleAlbumType[]=[
 import Days from '@/assets/30Days.mp3'
 import Tight from '@/assets/Tightrope.mp3'
 import Cold from '@/assets/Cold.mp3'
+import arch from '@/assets/archandroid.webp'
+import daysImage from '@/assets/30Days.png'
 
 const songs: singleSongType[]=[
     {
@@ -52,7 +54,7 @@ const songs: singleSongType[]=[
         album:'sd34sd',
         source:Tight,
         year:'2001',
-        image:'',
+        image: arch,
         trackNumber:7,
         lyrics:'',
     },
@@ -63,7 +65,7 @@ const songs: singleSongType[]=[
         album:'sd34sd',
         source:Cold,
         year:'2001',
-        image:'',
+        image:arch,
         trackNumber:6,
         lyrics:'',
     },
@@ -74,7 +76,7 @@ const songs: singleSongType[]=[
         album:'hh34fg',
         source:Days,
         year:'2013',
-        image:'',
+        image:daysImage,
         trackNumber:6,
         lyrics:'',
     },

@@ -1,7 +1,7 @@
 <template>
 <ion-page>
     <!-- <CustomHeaderVue /> -->
-    <h1>Search</h1>
+    <ion-searchbar show-clear-button="focus"> </ion-searchbar>
     
 </ion-page>
 
@@ -9,6 +9,6 @@
 </template>
 
 <script lang="ts" setup>
-import { IonPage } from '@ionic/vue';
+import { IonPage,IonSearchbar } from '@ionic/vue';
 
 </script>

@@ -1,13 +1,10 @@
 <template>
-    <ion-modal
-        ref="modal"
-        :is-open="isOpen"
-    >
+    <ion-page>
         <ion-content class="ion-padding">
-            <ion-icon :icon="chevronDownOutline" size="large" @click="setState({isOpen:false})"></ion-icon>
+            <ion-icon :icon="chevronDownOutline" size="large" @click="leaveMediaControls"></ion-icon>
             <div class="nowPlaying-container">
                 <div class="image-container">
-                    <img :style="{height:'100%',objectFit:'cover'}" alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+                    <img :style="{height:'100%',objectFit:'cover'}" alt="Silhouette of mountains" :src="theCurrentPlaying.image" />
                 </div>
 
                 <div class="song-case">
@@ -34,21 +31,21 @@
                     <ion-icon :icon="playForward" size="large" @click="playNextSong"></ion-icon>
                 </div>
             </div>
+            <QueuedSongsModal :isOpen="isOpen"/>
         </ion-content>
 
-    </ion-modal>
-
-    <QueuedSongsModal/>
+    </ion-page>
 
 </template>
 
 <script lang="ts" setup>
-import { IonModal,IonContent,IonIcon,IonText} from '@ionic/vue';
+import { IonContent,IonIcon,IonText,IonPage} from '@ionic/vue';
 import { chevronDownOutline,playBack,playForward,play,pause } from 'ionicons/icons';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 // components
-import QueuedSongsModal from './QueuedSongsModal.vue';
+import QueuedSongsModal from '@/components/QueuedSongsModal.vue';
 
 //zustand
 import useMediaControlStore from '@/composable/mediaControlState'
@@ -60,18 +57,19 @@ import { singleSongType } from '@/types/dataTypes';
 //utils
 import playerControls from '@/utils/playerControls';
 
+const router= useRouter()
 
 //FUNCTIONS
-const {getState,setState,subscribe} = useMediaControlStore;
+const {setState:setControlState} = useMediaControlStore;
 const {getState:playingState, subscribe:playingSubscribe} = playerStore
 
-const isOpen=ref<boolean>(getState().isOpen)
+// const isOpen=ref<boolean>(getState().isOpen)
 const theCurrentPlaying=ref<singleSongType>(playingState().currentlyPlaying)
 const isPlaying= ref<boolean>(playingState().isPlaying);
 
-subscribe(()=>{
-    isOpen.value= getState().isOpen
-})
+// subscribe(()=>{
+//     isOpen.value= getState().isOpen
+// })
 
 playingSubscribe(()=>{
     isPlaying.value= playingState().isPlaying;
@@ -80,6 +78,15 @@ playingSubscribe(()=>{
 
 //control the playin
 const {pauseSong,playSound,playNextSong,playPreviousSong}=playerControls()
+
+function leaveMediaControls(){
+    // setControlState({isOpen:false})//closes the queued songs modal
+    isOpen.value=false
+    router.back()
+}
+
+//determines the queue modal is opened or close
+const isOpen= ref<boolean>(true)
 
 </script>
 

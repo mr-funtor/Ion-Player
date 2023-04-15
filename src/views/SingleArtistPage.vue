@@ -38,7 +38,7 @@
 <script lang="ts" setup>
 import { IonPage,IonContent,IonCard } from '@ionic/vue';
 import BackHeader from '@/components/BackHeader.vue'
-import { useRoute,useRouter,RouterLink } from 'vue-router';
+import { useRoute,RouterLink } from 'vue-router';
 
 //utility
 import {findArtistName,findArtistAlbums} from '@/utils/findingResources'

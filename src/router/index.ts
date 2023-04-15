@@ -60,7 +60,12 @@ const routes: Array<RouteRecordRaw> = [
   {
     path:'/singleSong/:id',
     component:()=>import('@/views/SingleSongPage.vue')
-  }
+  },
+  {
+    path:'/mediaControls',
+    component:()=>import('@/views/MediaControlsPage.vue')
+  },
+  
 ]
 
 const router = createRouter({

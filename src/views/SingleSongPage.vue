@@ -22,36 +22,36 @@
 
 <script lang="ts" setup>
 import { IonPage,IonContent,IonList,IonItem,IonLabel,IonText } from '@ionic/vue';
-import { useRoute } from 'vue-router';
-// import {ref} from 'vue'
+import { useRoute,useRouter } from 'vue-router';
+
+//types
+import {singleSongType} from '@/types/dataTypes'
 
 //utility
 import {findSong} from '@/utils/findingResources'
 import playerControls from '@/utils/playerControls';
-import {singleSongType} from '@/types/dataTypes'
 
 //components
 import BackHeader from '@/components/BackHeader.vue'
 
 //zustand
-import mediaControlModalState from '@/composable/mediaControlState'
 import selectingFunctionState from '@/composable/selectingFunctionState'
 
 
 const route= useRoute()
+const router= useRouter()
 const params= route.params
 
 const singleSong= findSong(params.id as string)
 const {playMe}= playerControls()
 
-const {setState:modalSetState}= mediaControlModalState
+
 const {setState:setQueuingState} = selectingFunctionState
 
 function playTheSong(event:Event,song:singleSongType){
     // console.log(event,song)
     playMe(event,song)
-
-    modalSetState({isOpen:true})//opens the modal that shows media controls
+    router.push('/mediaControls')
 }
 
 function sortFunctions(event:Event){
@@ -61,7 +61,10 @@ function sortFunctions(event:Event){
         playTheSong(event, singleSong)
     }else if(target.dataset.structure === 'doQueue'){
         event.stopPropagation() //this prevents the 'playTheSong' function from running
-        setQueuingState({toBeQueuedItem:singleSong,isOpen:true,structure:'singleSong'})
+
+        //adds the song to be queue into the state
+        //if the user clicks add to queue the items will then be added
+        setQueuingState({toBeQueuedItem:singleSong,isOpen:true,structure:'singleSong'}) 
     }
 
 }

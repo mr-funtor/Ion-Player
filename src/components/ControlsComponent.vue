@@ -17,6 +17,7 @@
 import { IonPage,IonFooter,IonIcon } from '@ionic/vue';
 import { playBack,playForward,play,pause } from 'ionicons/icons';
 import {ref} from 'vue'
+import { useRouter } from 'vue-router';
 
 //utils
 import playerControls from '@/utils/playerControls';
@@ -29,6 +30,7 @@ import mediaControlModalState from '@/composable/mediaControlState'
 import {singleSongType} from '@/types/dataTypes'
 
 
+const router= useRouter()
 const {pauseSong,playSound,playNextSong,playPreviousSong}=playerControls()
 
 const {getState,subscribe}= playerStore;
@@ -51,6 +53,7 @@ function OpenMediaControlModal(e:Event){
 
     if(target.classList.contains('container')){
         modalSetState({isOpen:true})
+        router.push('/mediaControls')
     }
 }
 

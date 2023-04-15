@@ -10,8 +10,6 @@
             </ion-list>
         </ion-content>
 
-        <MediaControlsModal/>
-
     </ion-page>
 
 
@@ -19,7 +17,7 @@
 
 <script lang="ts" setup>
 import { IonPage,IonContent,IonList,IonItem,IonLabel } from '@ionic/vue';
-import { useRoute } from 'vue-router';
+import { useRoute,useRouter } from 'vue-router';
 // import {ref} from 'vue'
 
 //utility
@@ -29,13 +27,13 @@ import {singleSongType} from '@/types/dataTypes'
 
 //components
 import BackHeader from '@/components/BackHeader.vue'
-import {MediaControlsModal} from '@/components' 
 
 //zustand
 import mediaControlModalState from '@/composable/mediaControlState'
 
 
 const route= useRoute()
+const router= useRouter()
 const params= route.params
 
 
@@ -44,13 +42,13 @@ const foundSongs= findSongsInAlbum(params.id as string)
 const {playMe}= playerControls()
 
 console.log(foundSongs)
-const {setState:modalSetState}= mediaControlModalState
+// const {setState:modalSetState}= mediaControlModalState
 
 function playTheSong(event:Event,song:singleSongType){
     // console.log(event,song)
     playMe(event,song)
-
-    modalSetState({isOpen:true})//opens the modal that shows media controls
+    router.push('/mediaControls')
+    // modalSetState({isOpen:true})//opens the modal that shows media controls
 }
 
 

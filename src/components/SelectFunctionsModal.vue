@@ -23,15 +23,22 @@
 <script lang="ts" setup>
 import { IonModal,IonContent,IonItem,IonText,IonBackdrop} from '@ionic/vue';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 //utils
 import playerControls from '@/utils/playerControls';
 
 //zustand
 import selectingFunctionState from '@/composable/selectingFunctionState'
+import playerStore from '@/composable/playerStatus';
+import mediaControlModalState from '@/composable/mediaControlState'
+
+const router = useRouter()
 
 const {QueueTracks}=playerControls()
 const {getState:getQueuingState,subscribe:queueSubscribe,setState:setQueuingState} = selectingFunctionState
+const {getState: playerState}= playerStore
+const {setState:modalSetState}= mediaControlModalState
 
 const isOpen= ref<boolean>(getQueuingState().isOpen)
 
@@ -42,6 +49,10 @@ queueSubscribe(()=>{
 function startQueue(){
     QueueTracks();
     setQueuingState({isOpen:false})
+
+    if(playerState().queuedSongs.length <= 1){
+        router.push('/mediaControls')
+    }
 }
 
 </script>

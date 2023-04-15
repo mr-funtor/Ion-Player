@@ -30,7 +30,6 @@
             </ion-tabs>
         </ion-content>
 
-        <MediaControlsModal/>
         <SelectFunctionsModal/>
         
         
@@ -48,7 +47,6 @@ import {
     CustomHeaderVue,
     ControlsComponentVue,
     CustomModalVue,
-    MediaControlsModal,
     SelectFunctionsModal
  } from '@/components';
 </script>

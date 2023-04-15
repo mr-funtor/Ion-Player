@@ -1,6 +1,5 @@
 <template>
 <ion-page>
-    <!-- <CustomHeaderVue/> -->
     <ion-content>
         <ion-tabs>
             <ion-router-outlet></ion-router-outlet>
@@ -28,8 +27,7 @@ import {
     IonPage, 
     IonTabBar, 
     IonTabs, IonTabButton,IonRouterOutlet,IonLabel,
-    IonContent,IonFooter,IonToolbar } from '@ionic/vue';
-import CustomHeaderVue from '@/components/CustomHeader.vue';
+    IonContent} from '@ionic/vue';
 
 
 </script>
